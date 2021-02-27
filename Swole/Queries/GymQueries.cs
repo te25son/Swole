@@ -1,10 +1,12 @@
 ﻿using HotChocolate;
+using HotChocolate.Types;
 using Swole.Data;
 using System.Linq;
 
-namespace Swole
+namespace Swole.Queries
 {
-    public class Query
+    [ExtendObjectType(Name = "Query")]
+    public class GymQueries
     {
         public IQueryable<Gym> GetGyms([Service] AppDbContext context) =>
             context.Gyms;
