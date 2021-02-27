@@ -9,10 +9,10 @@ namespace Swole.Data
         {
         }
 
-        public DbSet<Gym> Gyms { get; set; }
+        public DbSet<Gym> Gyms { get; set; } = default!;
 
-        public DbSet<Member> Members { get; set; }
+        public DbSet<Member> Members { get; set; } = default!;
 
-        public DbSet<Gym> Employees { get; set; }
+        public DbSet<Gym> Employees { get; set; } = default!;
     }
 }
