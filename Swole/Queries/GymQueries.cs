@@ -1,14 +1,18 @@
 ﻿using HotChocolate;
 using HotChocolate.Types;
+using Microsoft.EntityFrameworkCore;
 using Swole.Data;
-using System.Linq;
+using Swole.Extensions;
+using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace Swole.Queries
 {
     [ExtendObjectType(Name = "Query")]
     public class GymQueries
     {
-        public IQueryable<Gym> GetGyms([Service] AppDbContext context) =>
-            context.Gyms;
+        [UseAppDbContext]
+        public Task<List<Gym>> GetGyms([ScopedService] AppDbContext context) =>
+            context.Gyms.ToListAsync();
     }
 }
