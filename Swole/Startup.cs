@@ -7,6 +7,7 @@ using Swole.Data;
 using Swole.DataLoaders;
 using Swole.Mutations;
 using Swole.Queries;
+using Swole.Types;
 
 namespace Swole
 {
@@ -27,7 +28,10 @@ namespace Swole
                 .AddMutationType(d => d.Name("Mutation"))
                     .AddTypeExtension<GymMutations>()
 
-                .AddDataLoader<GymByIdDataLoader>();
+                .AddType<GymType>()
+
+                .AddDataLoader<GymByIdDataLoader>()
+                .AddDataLoader<EmployeeByIdDataLoader>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

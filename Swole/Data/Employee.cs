@@ -1,12 +1,10 @@
-﻿using System;
+﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Swole.Data
 {
-    public class Employee
+    public abstract class Employee : Entity
     {
-        public Guid Id { get; set; }
-
         [Required]
         [StringLength(100)]
         public string? FirstName { get; set; }
@@ -14,5 +12,7 @@ namespace Swole.Data
         [Required]
         [StringLength(100)]
         public string? LastName { get; set; }
+
+        public virtual EmployeeType Type { get; set; }
     }
 }

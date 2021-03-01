@@ -2,15 +2,17 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Swole.Data;
 
 namespace Swole.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210301145554_Changes")]
+    partial class Changes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,6 +33,9 @@ namespace Swole.Migrations
                         .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
+                    b.Property<Guid?>("GymId")
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("LastName")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -40,6 +45,8 @@ namespace Swole.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("GymId");
 
                     b.ToTable("Employee");
 
@@ -122,16 +129,23 @@ namespace Swole.Migrations
                     b.HasDiscriminator().HasValue("Trainer");
                 });
 
+            modelBuilder.Entity("Swole.Data.Employee", b =>
+                {
+                    b.HasOne("Swole.Data.Gym", null)
+                        .WithMany("Employees")
+                        .HasForeignKey("GymId");
+                });
+
             modelBuilder.Entity("Swole.Data.GymEmployee", b =>
                 {
                     b.HasOne("Swole.Data.Employee", "Employee")
-                        .WithMany()
+                        .WithMany("Employees")
                         .HasForeignKey("EmployeeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Swole.Data.Gym", "Gym")
-                        .WithMany("Employees")
+                        .WithMany()
                         .HasForeignKey("GymId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -146,6 +160,11 @@ namespace Swole.Migrations
                     b.HasOne("Swole.Data.Gym", null)
                         .WithMany("Members")
                         .HasForeignKey("GymId");
+                });
+
+            modelBuilder.Entity("Swole.Data.Employee", b =>
+                {
+                    b.Navigation("Employees");
                 });
 
             modelBuilder.Entity("Swole.Data.Gym", b =>
