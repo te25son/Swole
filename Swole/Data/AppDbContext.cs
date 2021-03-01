@@ -20,8 +20,6 @@ namespace Swole.Data
 
         public DbSet<Member> Members { get; set; } = default!;
 
-        public DbSet<Instructor> Instructors { get; set; } = default!;
-
-        public DbSet<Trainer> Trainers { get; set; } = default!;
+        public DbSet<Employee> Employees { get; set; } = default!;
     }
 }

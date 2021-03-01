@@ -1,9 +1,8 @@
-﻿using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace Swole.Data
 {
-    public abstract class Employee : Entity
+    public class Employee : Entity
     {
         [Required]
         [StringLength(100)]
@@ -13,6 +12,6 @@ namespace Swole.Data
         [StringLength(100)]
         public string? LastName { get; set; }
 
-        public virtual EmployeeType Type { get; set; }
+        public EmployeeType Type { get; set; }
     }
 }

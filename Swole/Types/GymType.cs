@@ -31,9 +31,9 @@ namespace Swole.Types
                 CancellationToken cancellationToken)
             {
                 var employeeIds = await context.Gyms
-                    .Where(i => i.Id == gym.Id)
-                    .Include(i => i.Employees)
-                    .SelectMany(i => i.Employees.Select(e => e.GymId))
+                    .Where(g => g.Id == gym.Id)
+                    .Include(g => g.Employees)
+                    .SelectMany(g => g.Employees.Select(e => e.GymId))
                     .ToArrayAsync();
 
                 return await employeeById.LoadAsync(employeeIds, cancellationToken);
