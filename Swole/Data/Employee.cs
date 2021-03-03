@@ -12,6 +12,7 @@ namespace Swole.Data
         [StringLength(100)]
         public string? LastName { get; set; }
 
-        public EmployeeType Type { get; set; }
+        [Required]
+        public EmployeeType? Type { get; set; }
     }
 }
