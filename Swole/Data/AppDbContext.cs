@@ -14,6 +14,10 @@ namespace Swole.Data
             modelBuilder
                 .Entity<GymEmployee>()
                 .HasKey(e => new { e.GymId, e.EmployeeId });
+
+            modelBuilder
+                .Entity<GymMember>()
+                .HasKey(e => new { e.GymId, e.MemberId });
         }
 
         public DbSet<Gym> Gyms { get; set; } = default!;

@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Swole.Data
 {
@@ -14,5 +15,7 @@ namespace Swole.Data
 
         [Required]
         public EmployeeType? Type { get; set; }
+
+        public ICollection<GymEmployee> Employees { get; set; } = new List<GymEmployee>();
     }
 }

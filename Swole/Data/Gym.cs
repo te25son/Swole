@@ -10,7 +10,7 @@ namespace Swole.Data
         [StringLength(200)]
         public string? Name { get; set; }
 
-        public ICollection<Member>? Members { get; set; }
+        public ICollection<GymMember> Members { get; set; } = new List<GymMember>();
 
         public ICollection<GymEmployee> Employees { get; set; } = new List<GymEmployee>();
     }
