@@ -30,6 +30,8 @@ namespace Swole
 
                 .AddType<GymType>()
 
+                .EnableRelaySupport()
+
                 .AddDataLoader<GymByIdDataLoader>()
                 .AddDataLoader<EmployeeByIdDataLoader>();
         }
