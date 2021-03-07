@@ -1,11 +1,18 @@
 ﻿using Swole.Data;
+using System.Collections.Generic;
 
 namespace Swole.Mutations.Payloads
 {
-    public class AddGymPayload
+    public class AddGymPayload : PayloadBase<Gym>
     {
-        public AddGymPayload(Gym gym) => Gym = gym;
+        public AddGymPayload(Gym gym)
+            : base(gym)
+        {
+        }
 
-        public Gym Gym { get; }
+        public AddGymPayload(IReadOnlyList<UserError> errors)
+            : base(errors)
+        {
+        }
     }
 }
