@@ -1,4 +1,5 @@
 ﻿using HotChocolate;
+using HotChocolate.Resolvers;
 using HotChocolate.Types;
 using Microsoft.EntityFrameworkCore;
 using Swole.Data;
@@ -15,6 +16,11 @@ namespace Swole.Types
     {
         protected override void Configure(IObjectTypeDescriptor<Gym> descriptor)
         {
+            descriptor
+                .ImplementsNode()
+                .IdField(g => g.Id)
+                .ResolveNode((context, id) => context.DataLoader<GymByIdDataLoader>().LoadAsync(id, context.RequestAborted));
+
             descriptor
                 .Field(g => g.Employees)
                 .ResolveWith<GymResolvers>(i => i.GetEmployeesAsync(default!, default!, default!, default))

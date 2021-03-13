@@ -1,5 +1,6 @@
 ﻿using HotChocolate;
 using HotChocolate.Types;
+using HotChocolate.Types.Relay;
 using Microsoft.EntityFrameworkCore;
 using Swole.Data;
 using Swole.DataLoaders;
@@ -18,7 +19,12 @@ namespace Swole.Queries
         public Task<List<Gym>> GetGyms([ScopedService] AppDbContext context) =>
             context.Gyms.ToListAsync();
 
-        public Task<Gym> GetGymAsync(Guid id, GymByIdDataLoader dataLoader, CancellationToken cancellationToken) =>
-            dataLoader.LoadAsync(id, cancellationToken);
+        public Task<Gym> GetGymAsync(
+            [ID(nameof(Gym))] Guid id,
+            GymByIdDataLoader dataLoader,
+            CancellationToken cancellationToken)
+        {
+            return dataLoader.LoadAsync(id, cancellationToken);
+        }
     }
 }
